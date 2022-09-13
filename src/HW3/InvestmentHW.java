@@ -1,4 +1,4 @@
-package Homework3;
+package HW3;
 import Utility.Investment;
 import java.util.Scanner;
 
