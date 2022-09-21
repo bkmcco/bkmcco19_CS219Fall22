@@ -10,26 +10,57 @@ public class Weather {
         double W = 35.74+(0.6215*t)+(((0.4275*t)-35.75)*Math.pow(v,0.16));
         return W;
     }
+   public static double getVelocity(Scanner kbd) {
+
+       double velocity = 0;
+       boolean valid = false;
+
+       while (valid) {
+           System.out.print("Enter wind velocity in MPH:");
+           if (kbd.hasNextDouble()) {
+               velocity = kbd.nextDouble();
+               if (velocity < 0) {
+                   System.out.printf("Error: velocity can't be negative. You entered %.2f.", velocity);
+                   System.out.println("");
+               }
+
+           }//end velocity if/else
+       }//end velocity while
+    return velocity;
+   }//end getVelocity
+
+    public static double getTemperature(Scanner kbd) {
+        boolean valid = false;
+        double temperature = 0;
+
+        while (!valid) {
+            System.out.print("Enter temperature in degrees F: ");
+            if (kbd.hasNextDouble()) {
+                temperature = kbd.nextDouble();
+                valid = true;
+            }
+            else {
+                System.out.printf("Error: You need to enter a number...you entered \"%s\". ", kbd.next());
+                System.out.println("");
+            }
+        }
+        return temperature;
+    }
+
+
+
     public static void main(String [] args) {
 
-        //used for getting input from the keyboard
         Scanner kbd = new Scanner(System.in);
+        double temperature = getTemperature(kbd);
 
-        System.out.print("Enter temperature in degrees F: ");
+        double velocity = getVelocity(kbd);
 
-        double temperature = 0;
-        if (kbd.hasNextDouble()) {
-             temperature = kbd.nextDouble();
-        }
-        else{
-            System.out.printf("Error: You need to enter a number...you entered \"%s\". ", kbd.next());
-            return;    //exit main
-        }
-        System.out.print("Enter wind velocity in MPH: ");
-
-        double velocity = kbd.nextDouble();
-
-        System.out.printf("The windchill for %.1f degrees at %.1f MPH is %.2f degrees. \n",temperature,velocity,windchill(temperature,velocity));
-        System.out.println("They said \"Don't do it\".");
+        System.out.printf("For a temperature of" + temperature + " and a velocity of " + velocity + " you will get a windchill of " + windchill(temperature,velocity));
     }
 }
+
+
+
+
+

@@ -11,18 +11,19 @@ public class InvestmentHW {
 
         Scanner kbd = new Scanner(System.in);
 
-        System.out.print("Enter the starting amount: ");
-        if(!kbd.hasNextDouble()){
-            String word = kbd.next();
-            System.err.println("Error: " +word+" is not a number.");
-            System.exit(0);
 
-        }
-        double c = kbd.nextDouble();
-        if(c < 0.0) {
-            System.err.println("Error: starting amount must be a positive number.");
-            System.exit(0);
-        }
+            System.out.print("Enter the starting amount: ");
+            if (!kbd.hasNextDouble()) {
+                String word = kbd.next();
+                System.err.println("Error: " + word + " is not a number.");
+                System.exit(0);
+
+            }
+            double c = kbd.nextDouble();
+            if (c < 0.0) {
+                System.err.println("Error: starting amount must be a positive number.");
+                System.exit(0);
+            }
 
         System.out.print("Enter the rate of interest: ");
         if(!kbd.hasNextDouble()){
