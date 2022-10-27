@@ -76,6 +76,32 @@ public class Examples {
         return total;
     }
 
+    //reverse the values in the array
+    public static int[] reverse(int [] arr) {
+
+        for(int i = 0; i < arr.length/2; i++){
+            int temp = arr[i];
+            arr[i] = arr[arr.length-1-i];
+            arr[arr.length -1 -i] = temp;
+        }
+        return arr;
+
+    }
+
+
+
+    //Return the value of the largest element in the array
+     public static int max(final int[] arr){
+       int curr_max = Integer.MIN_VALUE;   //initialize the variable as the first element of the list
+
+       for(int i =0; i < arr.length; i++) {
+           if(arr[i] > curr_max)
+               curr_max = arr[i];
+       }
+       return curr_max;
+    }
+
+    //Return average of an array
     public static double average(int[] arr){
         int total = 0;
         for(int v : arr){
@@ -98,9 +124,34 @@ public class Examples {
         }
     }
 
+    //Return the index of an item in an array. If not found -1
+
+    public static int indexOf(final String [] arr, String item) {
+        boolean present = false;
+        int place = 0;
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i].equals(item)) {
+                return i;
+            }
+        }
+        return -1;
+    }
     public static void main(String [] args) {
 
-        int [] nums = {4,1,0,9,2,8};
+        String [] names = {"Harry", "Hermione", "Ron", "Draco"};
+        System.out.println(indexOf(names,"Ron")==2);
+
+
+
+        int [] nums = {4,1,0,9,2,8};        //shorthand
+        int [] nums2 = new int [] {1,2,3,4,5};
+
+        System.out.println(max(nums)==9);
+
+        reverse(nums);
+
+
+
         int [] grades = new int[10];       //allocate space for ten grades
 
         //System.out.println(nums[2]);
@@ -122,5 +173,7 @@ public class Examples {
         System.out.println(sum3(grades)==48);
         System.out.println(average(grades)==4.8);
         System.out.println(median(grades)==4.5);
+
+
     }
 }
