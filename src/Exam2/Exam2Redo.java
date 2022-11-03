@@ -4,20 +4,19 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
-
-public class Exam {
+public class Exam2Redo {
 
     public static String reverse(String s) {
         if (s.length() == 0)
             return "";
         else
             return reverse(s.substring(1)) + s.charAt(0);
-
-
     }
-    public static String [] load_words(String path, int n) {
+
+    public static String[] load_words(String path, int n) {
         // connect to the web page of speeds
         URL url = null;    // null is the "nothing value"
         Scanner s = null;
@@ -28,47 +27,39 @@ public class Exam {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
-
             throw new RuntimeException(e);
         }
 
         // create an array of strings
-        String [] words = new String[n];
+        String[] words = new String[n];
+        String[] palindromes = new String[9];
+        String word = "";
         int i = 0;
+        int j = 0;
         while (s.hasNextLine()) {
-            words[i++] = s.nextLine();
+            word = s.nextLine();
+            words[i++] = word;
+            if (word.equals(reverse(word)) && !word.equals("")) {
+                palindromes[j++] = word;
             }
-
-        String [] palindromes = new String[9];
-        //words array contains all of the words in the file, in string form
-        for(int j = 0; j < words.length-1; j++){
-            String check = words[j];
-            if(check.equals(reverse(check))){
-                palindromes[i++] = check;
-            }
-
         }
-
         return palindromes;
     }
 
     public static void main(String[] args) {
-
-        String [] palindromes1 = load_words("http://10.60.15.25/~ehar/cs219/wordle-nyt-solutions.txt",
+        String [] palindromes = load_words("http://10.60.15.25/~ehar/cs219/wordle-nyt-solutions.txt",
                 2309);
-        Arrays.sort(palindromes1);
 
-        for(int i = 0; i < palindromes1.length/2; i++){
-            String temp = palindromes1[i];
-            palindromes1[i] = palindromes1[palindromes1.length-1-i];
-            palindromes1[palindromes1.length -1 -i] = temp;
+        //Putting the array in alphabetical order
+        Arrays.sort(palindromes);
+
+        //reversing the order of the palindromes array
+        for(int i = 0; i < palindromes.length/2; i++){
+            String temp = palindromes[i];
+            palindromes[i] = palindromes[palindromes.length-1-i];
+            palindromes[palindromes.length -1 -i] = temp;
         }
 
-        System.out.println(Arrays.toString(palindromes1));
-        }
-
-
-
-
+        System.out.println(Arrays.toString(palindromes));
     }
-
+}
